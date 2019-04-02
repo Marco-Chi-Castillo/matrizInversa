@@ -29,7 +29,7 @@ public class determinante {
      * @param matriz original
      * @return
      */
-    private double[][] subMatriz(int i, int index, double[][] matriz) {
+    public double[][] subMatriz(int i, int index, double[][] matriz) {
 
         double[][] temporal = new double[matriz.length - 1][matriz.length - 1];
         int contador1 = 0;
