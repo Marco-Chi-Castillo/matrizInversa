@@ -5,6 +5,10 @@
  */
 package matrizinversa;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author Santos
@@ -45,6 +49,11 @@ public class Panel extends javax.swing.JFrame {
         jLabel1.setText("Introduce el tamaño de la matriz:");
 
         jButtonCrearMatriz.setText("Crear matriz");
+        jButtonCrearMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCrearMatrizActionPerformed(evt);
+            }
+        });
 
         jButtonInversaMatriz.setText("Inversa de la matriz");
         jButtonInversaMatriz.addActionListener(new java.awt.event.ActionListener() {
@@ -176,12 +185,29 @@ public class Panel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInversaMatrizActionPerformed
 
     private void jButtonLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarTablaActionPerformed
-        // TODO add your handling code here:
+           DefaultTableModel modelo = (DefaultTableModel) jTableMatriz.getModel();
+        while(modelo.getRowCount()>0)modelo.removeRow(0);
+ 
+        TableColumnModel modCol = jTableMatriz.getColumnModel();
+        while(modCol.getColumnCount()>0)modCol.removeColumn(modCol.getColumn(0));
+        
+        TableColumnModel modCol2 = jTextFieldTamanoMatriz.getColumnModel();
+        while(modCol2.getColumnCount()>0)modCol2.removeColumn(modCol2.getColumn(0));
     }//GEN-LAST:event_jButtonLimpiarTablaActionPerformed
 
     private void jTextFieldTamanoMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTamanoMatrizActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTamanoMatrizActionPerformed
+
+    private void jButtonCrearMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCrearMatrizActionPerformed
+           int n;
+        n = Integer.parseInt(jTextFieldTamanoMatriz.getText());
+
+        DefaultTableModel dtm = new DefaultTableModel(n, n);
+        final JTable table = new JTable(dtm);
+        this.jTableMatriz.getTableHeader().setUI(null);
+        this.jTableMatriz.setModel(dtm);
+    }//GEN-LAST:event_jButtonCrearMatrizActionPerformed
 
     /**
      * @param args the command line arguments

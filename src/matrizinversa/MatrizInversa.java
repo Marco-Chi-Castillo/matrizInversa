@@ -16,6 +16,9 @@ public class MatrizInversa {
         adjunta ad = new adjunta();
         transpuestaMatriz trans = new transpuestaMatriz();
         
+        PanelMatriz ventana = new PanelMatriz();
+        ventana.setVisible(true);
+        
         try {
 
             double determinante = deter.determinante(0, matriz); //saca determinante
