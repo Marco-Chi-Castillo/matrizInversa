@@ -5,6 +5,9 @@
  */
 package matrizinversa;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+
 /**
  *
  * @author Santos
@@ -40,6 +43,7 @@ public class PanelMatrizInversa extends javax.swing.JFrame {
         jTablaMatriz = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
+        btnLimpiarTabla = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,7 +120,15 @@ public class PanelMatrizInversa extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 40));
 
         Image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/matrizinversa/antecedentes-azul-blanco-.jpg"))); // NOI18N
-        getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 40, 660, 350));
+        getContentPane().add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 200, 500, 190));
+
+        btnLimpiarTabla.setText("Limpiar Tablas");
+        btnLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarTablaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiarTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,6 +140,18 @@ public class PanelMatrizInversa extends javax.swing.JFrame {
     private void jButtonInversaMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInversaMatrizActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInversaMatrizActionPerformed
+
+    private void btnLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarTablaActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) jTablaMatriz.getModel();
+        while(modelo.getRowCount()>0)modelo.removeRow(0);
+ 
+        TableColumnModel modCol = jTablaMatriz.getColumnModel();
+        while(modCol.getColumnCount()>0)modCol.removeColumn(modCol.getColumn(0));
+        
+        TableColumnModel modCol2 = jTablaMatrizInversa.getColumnModel();
+        while(modCol2.getColumnCount()>0)modCol2.removeColumn(modCol2.getColumn(0));
+    }//GEN-LAST:event_btnLimpiarTablaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +190,7 @@ public class PanelMatrizInversa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Image;
+    private javax.swing.JButton btnLimpiarTabla;
     private javax.swing.JButton jButtonCrearMatriz;
     private javax.swing.JButton jButtonInversaMatriz;
     private javax.swing.JLabel jLabel1;
