@@ -5,6 +5,7 @@
  */
 package matrizinversa;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -66,6 +67,11 @@ public class PanelMatriz extends javax.swing.JFrame {
         });
 
         btnInvertir.setText("Invertir");
+        btnInvertir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInvertirActionPerformed(evt);
+            }
+        });
 
         txtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,9 +128,7 @@ public class PanelMatriz extends javax.swing.JFrame {
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addComponent(jLabel3)))
@@ -203,6 +207,58 @@ public class PanelMatriz extends javax.swing.JFrame {
         TableColumnModel modCol2 = tablamatrizinversa.getColumnModel();
         while(modCol2.getColumnCount()>0)modCol2.removeColumn(modCol2.getColumn(0));
     }//GEN-LAST:event_btnLimpiarTablasActionPerformed
+
+    private void btnInvertirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvertirActionPerformed
+                                                                                           
+        // TODO add your handling code here:
+        double Matriz[][] = new double[tablamatriz.getColumnCount()][tablamatriz.getColumnCount()];
+        try {
+            Object Datos[][] = new Object[tablamatriz.getColumnCount()][tablamatriz.getColumnCount()];
+
+            Object Vector;
+            String str;
+            for (int i = 0; i < tablamatriz.getColumnCount(); i++) {
+
+                for (int j = 0; j < tablamatriz.getColumnCount(); j++) {
+
+                    Datos[i][j] = tablamatriz.getValueAt(i, j);
+                }
+            }//Fin for 
+
+            for (int i = 0; i < tablamatriz.getColumnCount(); i++) {
+
+                for (int j = 0; j < tablamatriz.getColumnCount(); j++) {
+                    Vector = Datos[i][j];
+                    str = Vector.toString();
+                    Matriz[i][j] = Double.valueOf(str).doubleValue();
+                    //System.out.println(Matriz[i][j]);
+
+                }
+
+            }
+
+            DefaultTableModel tablamodelo = new DefaultTableModel(tablamatriz.getColumnCount(), tablamatriz.getColumnCount());
+            final JTable table2 = new JTable(tablamodelo);
+            this.tablamatrizinversa.getTableHeader().setUI(null);
+            this.tablamatrizinversa.setModel(tablamodelo);
+            this.tablamatrizinversa.setVisible(true);
+            MatrizInversa Mainver = new MatrizInversa();
+            double d[][] = Mainver.matrizinver(Matriz, Integer.parseInt(txtValor.getText()));
+
+            for (int i = 0; i < tablamatriz.getColumnCount(); i++) {
+
+                for (int j = 0; j < tablamatriz.getColumnCount(); j++) {
+      
+                    this.tablamatrizinversa.setValueAt(d[i][j], i, j);
+                }
+
+            }
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(this, "Error, llene completamente la matriz ");
+        }
+    }//GEN-LAST:event_btnInvertirActionPerformed
 
     /**
      * @param args the command line arguments
